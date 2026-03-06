@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Tailwind and Daisy Ui -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
         }
     </style>
 
-    <title>GITHUB | ISSUE | TRACKER</title>
+    <title>GITHUB | ISSUE | TRACKER | SIGN IN PAGE</title>
 </head>
 
 <body>
@@ -40,11 +40,11 @@
         <section class="flex flex-col items-center">
             <fieldset class="fieldset rounded-box w-4/5 p-4">
                 <label class="label text-lg font-semibold text-black">Username</label>
-                <input type="email" class="input w-full rounded-md p-6" placeholder="Enter Username" />
+                <input id="UsernameInput" type="email" class="input w-full rounded-md p-6" placeholder="Enter Username" />
                 <p class="text-sm text-purple-600 font-semibold">Default: admin</p>
 
                 <label class="label text-lg font-semibold text-black">Password</label>
-                <input type="password" class="input w-full rounded-md p-6" placeholder="Enter Password" />
+                <input id="passInput" type="password" class="input w-full rounded-md p-6" placeholder="Enter Password" />
                 <p class="text-sm text-purple-600 font-semibold">Default: admin123</p>
                 <button id="SignInBtn" class="btn btn-primary mt-4 p-7 text-xl font-bold">Sign In</button>
                 <div class="divider">OR</div>
