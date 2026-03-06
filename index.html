@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+
+    <!-- Tailwind and Daisy Ui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+
+    <title>GITHUB | ISSUE | TRACKER</title>
+</head>
+
+<body>
+    <main class="w-4/12 mx-auto shadow-lg m-17 border-2 border-gray-200 rounded-lg">
+        <section class="flex flex-col items-center pb-5">
+            <img class="p-8" src="./assets/github-logo.png" alt="github-logo">
+            <h2 class="text-4xl font-bold">GitHub Issues Tracker</h2>
+            <p class="opacity-60">Sign in to manage your issues</p>
+        </section>
+
+        <!-- Login Form -->
+        <section class="flex flex-col items-center">
+            <fieldset class="fieldset rounded-box w-4/5 p-4">
+                <label class="label text-lg font-semibold text-black">Username</label>
+                <input type="email" class="input w-full rounded-md p-6" placeholder="Enter Username" />
+                <p class="text-sm text-purple-600 font-semibold">Default: admin</p>
+
+                <label class="label text-lg font-semibold text-black">Password</label>
+                <input type="password" class="input w-full rounded-md p-6" placeholder="Enter Password" />
+                <p class="text-sm text-purple-600 font-semibold">Default: admin123</p>
+                <button id="loginBtn" class="btn btn-primary mt-4 p-7 text-xl font-bold">Login</button>
+                <div class="divider">OR</div>
+            </fieldset>
+        </section>
+
+
+
+    </main>
+</body>
+
+</html>
