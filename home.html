@@ -28,7 +28,64 @@
 </head>
 
 <body>
-    <h2>HELLO Iam Home PAGE</h2>
+    <header>
+        <nav>
+            <div class="navbar bg-base-100 shadow-sm p-6">
+                <div class="flex-1">
+                    <div class="flex gap-2 items-center">
+                        <img class="h-13" src="./assets/github-logo.png" alt="github-logo">
+                        <h3 class="font-bold text-2xl">GitHub Issues Tracker</h3>
+                    </div>
+                </div>
+                <div class="flex gap-6 pr-3">
+                    <input type="text" placeholder="🔍 Search issue...." class="p-6 input input-bordered w-24 md:w-auto" />
+                    <div class=" ">
+                        <button class="btn btn-primary p-6"><i class="fa-brands fa-sistrix"></i> Search</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="w-10/12 mx-auto">
+
+        <!-- ALl, Open.... Button Section -->
+        <section class="sectionContainer  bg-white shadow-sm mt-12 border-2 border-gray-200 rounded-lg">
+            <div class="flex gap-5 p-7 ">
+                <button class="btn btn-primary px-10">All</button>
+                <button class="btn btn-outline px-10">Open</button>
+                <button class="btn btn-outline px-10">Closed</button>
+            </div>
+        </section>
+
+        <!-- Total Issue bar -->
+        <section class="sectionContainer  bg-white shadow-sm mt-6 border-2 border-gray-200 rounded-lg">
+            <div class="flex justify-between items-center">
+                
+                <!-- total issue right -->
+                <div class="flex items-center gap-3 p-6">
+                    <div class="bg-purple-200 rounded-full p-3"><img src="./assets/Aperture.png" alt="Aperture"></div>
+                    <div class="">
+                        <h5 class="font-semibold text-2xl"><span id="totalIssue">0</span> Issues</h5>
+                        <p class="opacity-60">Track and manage your project issues</p>
+                    </div>
+                </div>
+
+                <!-- total issue left -->
+                <div class="flex gap-6">
+                    <div class="flex gap-5 items-center">
+                        <div class="h-4 w-4 bg-green-500 rounded-full"></div>
+                        <div class="font-semibold text-xl">Open</div>
+                    </div>
+                    <div class="flex gap-5 pr-5 items-center">
+                        <div class="h-4 w-4 bg-purple-500 rounded-full"></div>
+                        <div class="font-semibold text-xl">Closed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
 
 </body>
 
