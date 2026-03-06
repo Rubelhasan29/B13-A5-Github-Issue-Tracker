@@ -2,9 +2,37 @@ const CardContainer = document.getElementById("CardContainer")
 const allBtn = document.getElementById("allBtn")
 const openBtn = document.getElementById("openBtn")
 const closedBtn = document.getElementById("closedBtn")
+const loadingSpinner = document.getElementById("loadingSpinner")
+
+
+const showSpinner= () => {
+    loadingSpinner.classList.remove('hidden')
+}
+
+const hideSpinner= () => {
+    loadingSpinner.classList.add('hidden')
+}
 
 
 
+// Change the buttons color
+document.getElementById('buttons').addEventListener('click', function (event) {
+    let clickedBtn = event.target;
+    allBtn.classList.remove('btn-primary')
+    if (clickedBtn.innerText === "Open") {
+        closedBtn.classList.remove('btn-primary')
+        openBtn.classList.add('btn-primary')
+    }
+    else if (clickedBtn.innerText === "Closed") {
+        openBtn.classList.remove('btn-primary')
+        clickedBtn.classList.add('btn-primary')
+    }
+    else {
+        openBtn.classList.remove('btn-primary')
+        closedBtn.classList.remove('btn-primary')
+        allBtn.classList.add('btn-primary')
+    }
+})
 
 
 
@@ -17,11 +45,14 @@ function createLabel(arr) {
 
 
 async function loadCards() {
+    showSpinner()
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     const data = await res.json();
 
     displayTheCards(data.data);
+    hideSpinner()
 }
+
 function displayTheCards(data) {
     const CardContainer = document.getElementById("CardContainer")
     CardContainer.innerHTML = '';
