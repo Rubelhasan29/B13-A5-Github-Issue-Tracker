@@ -52,10 +52,10 @@
 
         <!-- ALl, Open.... Button Section -->
         <section class="sectionContainer  bg-white shadow-sm mt-12 border-2 border-gray-200 rounded-lg">
-            <div class="flex gap-5 p-7 ">
-                <button class="btn btn-primary px-10">All</button>
-                <button class="btn btn-outline px-10">Open</button>
-                <button class="btn btn-outline px-10">Closed</button>
+            <div id="buttons" class="flex gap-5 p-7 ">
+                <button id="allBtn" class="btn btn-primary border border-black px-10">All</button>
+                <button id="openBtn"  class="btn border border-black px-10">Open</button>
+                <button id="closedBtn"  class="btn border border-black px-10">Closed</button>
             </div>
         </section>
 
@@ -87,23 +87,8 @@
         </section>
 
         <!-- Card Section -->
-        <section id="CardContainer" class="shadow-md grid grid-cols-4 gap-2 p-5">
-            <div id="card" class="shadow-lg rounded-lg p-7 border-t-5 border-green-400 space-y-3">
-                <div id="priority" class="flex justify-end  ">
-                    <h1 class="bg-red-300 px-3 rounded-lg">HIGh</h1>
-                </div>
-                <h2 class="text-left text-xl font-semibold">Fix navigation menu on mobile devices</h2>
-                <p class="opacity-60">The navigation menu doesn't collapse properly on mobile devices...</p>
-                <div id="labels" class="">
-                    <div id="priority" class="flex justify-start  ">
-                        <h1 class="bg-red-300 px-3 rounded-lg">BUG</h1>
-                    </div>
-                </div>
-                <hr>
-                <p id="assignee" class="opacity-60">#1
-                    by john_doe</p>
-                <p id="createdAt" class="opacity-60">1/15/2024</p>
-            </div>
+        <section id="CardContainer" class="shadow-md grid grid-cols-4 gap-4 p-5 space-y-4">
+
 
         </section>
 
