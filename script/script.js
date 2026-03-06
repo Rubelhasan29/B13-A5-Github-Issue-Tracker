@@ -1,4 +1,4 @@
-document.getElementById("SignInBtn").addEventListener("click", function(){
+document.getElementById("SignInBtn").addEventListener('click', function(){
     // get the username input val
     const usernameInput = document.getElementById("UsernameInput")
     const username = usernameInput.value;
@@ -15,4 +15,4 @@ document.getElementById("SignInBtn").addEventListener("click", function(){
         return;
     }
 
-})
+});
