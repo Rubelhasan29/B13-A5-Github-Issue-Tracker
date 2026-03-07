@@ -2,12 +2,17 @@ const closedCardContainer = document.getElementById("closedCardContainer")
 const openCardContainer = document.getElementById("openCardContainer")
 const loadingSpinner = document.getElementById("loadingSpinner")
 const CardContainer = document.getElementById("CardContainer")
+const searchInput = document.getElementById("searchInput")
 const totalIssue = document.getElementById('totalIssue')
+const searchBtn = document.getElementById("searchBtn")
+const CardModal = document.getElementById("CardModal")
 const closedBtn = document.getElementById("closedBtn")
 const openBtn = document.getElementById("openBtn")
 const allBtn = document.getElementById("allBtn")
-const CardModal = document.getElementById("CardModal")
 let CurrentTab = "allBtn";
+let allIssue = [];
+
+
 
 
 
@@ -75,6 +80,7 @@ async function loadCards() {
     showSpinner()
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     const data = await res.json();
+    allIssue = data.data;
     displayTheCards(data.data);
     hideSpinner()
 }
@@ -82,7 +88,8 @@ async function loadCards() {
 function displayTheCards(data) {
     const CardContainer = document.getElementById("CardContainer")
     CardContainer.innerHTML = '';
-    console.log(data)
+    openCardContainer.innerText = '';
+    closedCardContainer.innerText = '';
     data.forEach(card => {
 
         let borderColor = "";
@@ -117,7 +124,6 @@ function displayTheCards(data) {
             const openCardCopy = cardDiv.cloneNode(true)
             openCardContainer.appendChild(openCardCopy)
         }
-
 
 
     });
@@ -162,9 +168,9 @@ function displayTheModalCards(data) {
     const cardDiv = document.createElement('div')
     cardDiv.innerHTML = `
                 <div class="modal-box space-y-6 p-7">
-                    <h2 class="text-2xl font-bold">${data.title}</h2>
+                    <h2 class="text-2xl font-bold line-clamp-1">${data.title}</h2>
                     <div class="flex gap-2">
-                        <p class="${statusColor} rounded-md px-2 text-white">${data.status}</p>
+                        <p class="${statusColor} text-sm px-2 rounded-md text-white">${data.status}</p>
                         <div class="flex gap-4">
                             <p class="opacity-60 text-sm">Opened by${data.author}</p>
                             <p class="opacity-60 text-sm">Time${data.createdAt}</p>
@@ -173,10 +179,10 @@ function displayTheModalCards(data) {
                         <div class="flex justify-start  gap-2">${createLabel(data.labels)}</div>
                     <h2 class="description text-xl font-semibold">${data.description}</h2>
 
-                    <div class="grid grid-cols-3 bg-gray-100 p-5 rounded-md">
+                    <div class="grid grid-cols-2 gap-4 bg-gray-100 p-5 rounded-md">
                         <div ">
                             <p class="mb-4">Assignee:</p>
-                            <h3 class="font-bold">${data.author}</h3>
+                            <h3 class="font-semibold">${data.author}</h3>
                         </div>
                         <div class="">
                             <p class="mb-4">Priority:</p>
@@ -193,6 +199,18 @@ function displayTheModalCards(data) {
         `
     CardModal.appendChild(cardDiv)
 }
+
+searchBtn.addEventListener('click', function(){
+    const searchValue = searchInput.value.toLowerCase();
+
+    const filteredIssue = allIssue.filter(issue =>
+        issue.title.toLowerCase().includes(searchValue) || issue.description.toLowerCase().includes(searchValue)
+    )
+
+    displayTheCards(filteredIssue)
+})
+
+
 
 changeTab(CurrentTab);
 loadCards();

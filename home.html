@@ -34,14 +34,14 @@
                 <div class="flex-1">
                     <div class="flex gap-2 items-center">
                         <img class="h-10 md:h-13" src="./assets/github-logo.png" alt="github-logo">
-                        <h3 class="font-bold md:text-2xl">GitHub Issues Tracker</h3>
+                        <h3 class="font-bold text-lg md:text-2xl">GitHub Issues Tracker</h3>
                     </div>
                 </div>
-                <div class="flex gap-6 md:pr-3">
-                    <input type="text" placeholder="🔍 Search issue...."
-                        class="p-6 input input-bordered w-24 md:w-auto" />
+                <div class="flex gap-1 md:gap-6 md:pr-3">
+                    <input id="searchInput" type="text" placeholder="🔍 Search issue...."
+                        class="md:p-6 input input-bordered w-24 md:w-auto" />
                     <div class=" ">
-                        <button class="btn btn-primary p-6"><i class="fa-solid fa-plus"></i>New Issue</button>
+                        <button id="searchBtn" class="btn btn-primary md:p-6"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
                     </div>
                 </div>
             </div>
