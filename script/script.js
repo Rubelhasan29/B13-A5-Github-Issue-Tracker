@@ -9,7 +9,7 @@ document.getElementById("SignInBtn").addEventListener('click', function(){
 
     //  match them with actual value
     if(username == "admin" && password == 'admin123'){
-        window.location.assign("/home.html")
+        window.location.assign("home.html")
     }else{
         alert("Wrong Information");
         return;
