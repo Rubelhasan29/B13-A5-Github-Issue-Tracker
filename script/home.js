@@ -82,7 +82,7 @@ async function loadCards() {
 function displayTheCards(data) {
     const CardContainer = document.getElementById("CardContainer")
     CardContainer.innerHTML = '';
-
+    console.log(data)
     data.forEach(card => {
 
         let borderColor = "";
@@ -164,7 +164,7 @@ function displayTheModalCards(data) {
                 <div class="modal-box space-y-6 p-7">
                     <h2 class="text-2xl font-bold">${data.title}</h2>
                     <div class="flex gap-2">
-                        <p class="${statusColor} rounded-md px-2">${data.status}</p>
+                        <p class="${statusColor} rounded-md px-2 text-white">${data.status}</p>
                         <div class="flex gap-4">
                             <p class="opacity-60 text-sm">Opened by${data.author}</p>
                             <p class="opacity-60 text-sm">Time${data.createdAt}</p>
@@ -173,14 +173,14 @@ function displayTheModalCards(data) {
                         <div class="flex justify-start  gap-2">${createLabel(data.labels)}</div>
                     <h2 class="description text-xl font-semibold">${data.description}</h2>
 
-                    <div class="grid grid-cols-3">
+                    <div class="grid grid-cols-3 bg-gray-100 p-5 rounded-md">
                         <div ">
                             <p class="mb-4">Assignee:</p>
                             <h3 class="font-bold">${data.author}</h3>
                         </div>
                         <div class="">
                             <p class="mb-4">Priority:</p>
-                            <span class="bg-red-400 px-2 py-1 rounded-md">${data.priority}</span>
+                            <span class="bg-red-200 px-2 py-1 rounded-md">${data.priority}</span>
                         </div>
                     </div>
                     <div class="modal-action">
