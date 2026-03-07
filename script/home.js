@@ -1,18 +1,21 @@
-const CardContainer = document.getElementById("CardContainer")
-const openCardContainer = document.getElementById("openCardContainer")
 const closedCardContainer = document.getElementById("closedCardContainer")
-const allBtn = document.getElementById("allBtn")
-const openBtn = document.getElementById("openBtn")
-const closedBtn = document.getElementById("closedBtn")
+const openCardContainer = document.getElementById("openCardContainer")
 const loadingSpinner = document.getElementById("loadingSpinner")
+const CardContainer = document.getElementById("CardContainer")
+const totalIssue = document.getElementById('totalIssue')
+const closedBtn = document.getElementById("closedBtn")
+const openBtn = document.getElementById("openBtn")
+const allBtn = document.getElementById("allBtn")
+const CardModal = document.getElementById("CardModal")
 let CurrentTab = "allBtn";
 
 
-const showSpinner= () => {
+
+const showSpinner = () => {
     loadingSpinner.classList.remove('hidden')
 }
 
-const hideSpinner= () => {
+const hideSpinner = () => {
     loadingSpinner.classList.add('hidden')
 }
 
@@ -39,41 +42,39 @@ document.getElementById('buttons').addEventListener('click', function (event) {
     }
     changeTab(CurrentTab);
     console.log(CurrentTab);
-    
+
 });
 
-function changeTab(CurrentTab){
-    
-    if(CurrentTab === "allBtn"){
+function changeTab(CurrentTab) {
+
+    if (CurrentTab === "allBtn") {
         openCardContainer.classList.add("hidden")
         closedCardContainer.classList.add("hidden")
         CardContainer.classList.remove("hidden")
     }
-    else if(CurrentTab === "openBtn"){
+    else if (CurrentTab === "openBtn") {
         CardContainer.classList.add("hidden")
-        CardContainer.classList.add("hidden")
+        closedCardContainer.classList.add("hidden")
         openCardContainer.classList.remove("hidden")
     }
-    if(CurrentTab === "closedBtn"){
+    else if (CurrentTab === "closedBtn") {
         CardContainer.classList.add("hidden")
         openCardContainer.classList.add("hidden")
         closedCardContainer.classList.remove("hidden")
     }
+    totalIssueCount()
 
 }
 
 function createLabel(arr) {
     const createElement = arr.map((element) => `<h1 class="bg-yellow-200 px-3 py-1 rounded-lg">${element}</h1>`)
     return createElement.join(" ");
-    
-    
 }
 
 async function loadCards() {
     showSpinner()
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     const data = await res.json();
-    
     displayTheCards(data.data);
     hideSpinner()
 }
@@ -81,19 +82,18 @@ async function loadCards() {
 function displayTheCards(data) {
     const CardContainer = document.getElementById("CardContainer")
     CardContainer.innerHTML = '';
-    
+
     data.forEach(card => {
-        
+
         let borderColor = "";
         if (card.status === "closed") {
             borderColor = "border-purple-400";
         } else {
             borderColor = "border-green-400";
-            
         }
         const cardDiv = document.createElement('div')
         cardDiv.innerHTML = `
-        <div id="card" class="shadow-lg rounded-lg p-7 border-t-9 ${borderColor} space-y-7 h-full">
+        <div onclick="ShowTheMOdal(${card.id})" class="cursor-pointer card shadow-lg rounded-lg p-7 border-t-9 ${borderColor} space-y-7 h-full">
         <div id="priority" class="flex justify-end  ">
         <h1 class="bg-red-200 px-3 rounded-lg">${card.priority}</h1>
         </div>
@@ -109,11 +109,89 @@ function displayTheCards(data) {
         </div> 
         `
         CardContainer.appendChild(cardDiv)
-        
-        
+        if (card.status === "closed") {
+            const closedCardCopy = cardDiv.cloneNode(true)
+            closedCardContainer.appendChild(closedCardCopy)
+        }
+        else {
+            const openCardCopy = cardDiv.cloneNode(true)
+            openCardContainer.appendChild(openCardCopy)
+        }
+
+
+
     });
-    const totalIssue = document.getElementById('totalIssue')
-    totalIssue.innerText = CardContainer.children.length;
+    totalIssueCount()
+
+}
+
+function totalIssueCount() {
+    if (CurrentTab === "allBtn") {
+        totalIssue.innerText = CardContainer.children.length
+
+    }
+    else if (CurrentTab === "openBtn") {
+        totalIssue.innerText = openCardContainer.children.length
+
+    }
+    if (CurrentTab === "closedBtn") {
+        totalIssue.innerText = closedCardContainer.children.length
+
+    }
+}
+
+async function ShowTheMOdal(cardId) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${cardId}`)
+    const data = await res.json();
+    displayTheModalCards(data.data);
+    CardModal.showModal();
+}
+
+function displayTheModalCards(data) {
+    console.log(data);
+
+    CardModal.innerText = "";
+
+    let statusColor = "";
+    if (data.status === "closed") {
+        statusColor = "bg-purple-400";
+    } else {
+        statusColor = "bg-green-400";
+    }
+
+    const cardDiv = document.createElement('div')
+    cardDiv.innerHTML = `
+                <div class="modal-box space-y-6 p-7">
+                    <h2 class="text-2xl font-bold">${data.title}</h2>
+                    <div class="flex gap-2">
+                        <p class="${statusColor} rounded-md px-2">${data.status}</p>
+                        <div class="flex gap-4">
+                            <p class="opacity-60 text-sm">Opened by${data.author}</p>
+                            <p class="opacity-60 text-sm">Time${data.createdAt}</p>
+                        </div>
+                    </div>
+                        <div class="flex justify-start  gap-2">${createLabel(data.labels)}</div>
+                    <h2 class="description text-xl font-semibold">${data.description}</h2>
+
+                    <div class="grid grid-cols-3">
+                        <div ">
+                            <p class="mb-4">Assignee:</p>
+                            <h3 class="font-bold">${data.author}</h3>
+                        </div>
+                        <div class="">
+                            <p class="mb-4">Priority:</p>
+                            <span class="bg-red-400 px-2 py-1 rounded-md">${data.priority}</span>
+                        </div>
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary p-6">Close</button>
+                        </form>
+                    </div>
+                </div> 
+        `
+    CardModal.appendChild(cardDiv)
 }
 
 changeTab(CurrentTab);
