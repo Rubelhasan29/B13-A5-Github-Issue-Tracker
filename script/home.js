@@ -16,17 +16,21 @@ let allIssue = [];
 
 const showSpinner = () => {
     loadingSpinner.classList.remove('hidden')
+    CardContainer.classList.add('hidden')
+    openCardContainer.classList.add('hidden')
+    closedCardContainer.classList.add('hidden')
 }
 
 const hideSpinner = () => {
     loadingSpinner.classList.add('hidden')
+    changeTab(CurrentTab)
 }
 
 // Change the buttons color
 document.getElementById('buttons').addEventListener('click', function (event) {
     let clickedBtn = event.target;
     console.log(clickedBtn);
-    
+
     allBtn.classList.remove('btn-primary')
     if (clickedBtn.innerText === "Open") {
         closedBtn.classList.remove('btn-primary')
@@ -48,7 +52,6 @@ document.getElementById('buttons').addEventListener('click', function (event) {
     showSpinner()
 
     setTimeout(() => {
-        changeTab(CurrentTab);
         hideSpinner()
     }, 50);
 
@@ -75,27 +78,27 @@ function changeTab(CurrentTab) {
 }
 
 function createLabel(arr) {
-    const createElement = arr.map((element) =>{
-        
+    const createElement = arr.map((element) => {
+
         let bgColor = "";
         let icon = ``;
-        if(element === "bug" || element === "good first issue"){
+        if (element === "bug" || element === "good first issue") {
             bgColor = 'bg-red-200'
             icon = `<i class="fa-solid fa-bug-slash"></i>`;
-            
+
         }
-        else if(element === "help wanted" || element === "documentation" ){
+        else if (element === "help wanted" || element === "documentation") {
             bgColor = 'bg-yellow-200'
             icon = `<i class="fa-solid fa-person-circle-exclamation"></i>`;
         }
-        else if(element === "enhancement"){
+        else if (element === "enhancement") {
             bgColor = 'bg-green-200'
             icon = `<i class="fa-regular fa-circle-xmark"></i>`;
         }
-        
+
         return `<h1 class="${bgColor} px-3 py-1 rounded-lg">${icon}  ${element}</h1>`;
-        })
-        return createElement.join(" ");
+    })
+    return createElement.join(" ");
 }
 
 async function loadCards() {
@@ -108,7 +111,6 @@ async function loadCards() {
 }
 
 function displayTheCards(data) {
-    const CardContainer = document.getElementById("CardContainer")
     CardContainer.innerHTML = '';
     openCardContainer.innerText = '';
     closedCardContainer.innerText = '';
@@ -128,7 +130,7 @@ function displayTheCards(data) {
             priorityBg = "bg-red-200"
         } else if (card.priority === "medium") {
             priorityBg = "bg-yellow-200"
-        }else{
+        } else {
             priorityBg = "bg-gray-200"
 
         }
@@ -233,7 +235,7 @@ function displayTheModalCards(data) {
     CardModal.appendChild(cardDiv)
 }
 
-searchBtn.addEventListener('click', function(){
+searchBtn.addEventListener('click', function () {
     const searchValue = searchInput.value.toLowerCase();
 
     const filteredIssue = allIssue.filter(issue =>
