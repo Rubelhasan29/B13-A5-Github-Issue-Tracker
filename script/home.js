@@ -44,8 +44,14 @@ document.getElementById('buttons').addEventListener('click', function (event) {
         allBtn.classList.add('btn-primary')
         CurrentTab = "allBtn"
     }
-    changeTab(CurrentTab);
-    console.log(CurrentTab);
+
+    showSpinner()
+
+    setTimeout(() => {
+        changeTab(CurrentTab);
+        hideSpinner()
+    }, 50);
+
 });
 
 function changeTab(CurrentTab) {
