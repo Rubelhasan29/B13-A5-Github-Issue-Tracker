@@ -45,4 +45,7 @@ Follow these steps to set up the project locally:
 
 1. Clone the repository:
 ``bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone past the link(https:// ------)
+
+
+## Project Live Link : https://github-issue-tracker00112.netlify.app/
